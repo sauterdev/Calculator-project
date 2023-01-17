@@ -6,27 +6,15 @@ let operatorSelected = false;
 let decimalCounter = false;
 
 let calcDisplay = document.querySelector(`#calcDisplay`);
-//selects all operands and operators in an array to loop over for event listeners
+
+//selects all operands and operators in a node list to loop over for event listeners
 const operandButton = document.querySelectorAll(`.operand-button`);
 const  operatorButton = document.querySelectorAll(`.operator-button`);
+//
 
  const clearButton = document.querySelector(`#clear`);
  const negativeButton = document.querySelector(`#negative`);
  const percentButton = document.querySelector(`#percent`);
-// const divideButton = document.querySelector(`#divide`);
-// const sevenButton = document.querySelector(`#seven`);
-// const eightButton = document.querySelector(`#eight`);
-// const nineButton = document.querySelector(`#nine`);
-// const multiplyButton = document.querySelector(`#multiply`);
-// const fourButton = document.querySelector(`#four`);
-// const fiveButton = document.querySelector(`#five`);
-// const sixButton = document.querySelector(`#six`);
-// const subtractButton = document.querySelector(`#subtract`);
-// const oneButton = document.querySelector(`#one`);
-// const twoButton = document.querySelector(`#two`);
-// const threeButton = document.querySelector(`#three`);
-// const addButton = document.querySelector(`#add`);
-// const zeroButton = document.querySelector(`#zero`);
 const decimalButton = document.querySelector(`#decimal`);
 const equalsButton = document.querySelector(`#equals`);
 
@@ -37,22 +25,6 @@ for (let i = 0; i < operandButton.length; i++) { //puts a click event on all the
 for (let i = 0; i < operatorButton.length; i++) { //puts a click event on all opertor buttons
   operatorButton[i].addEventListener(`click`, selectOperator)
 };
-
-// zeroButton.addEventListener(`click`, selectOperand);
-// oneButton.addEventListener(`click`, selectOperand);
-// twoButton.addEventListener(`click`, selectOperand);
-// threeButton.addEventListener(`click`, selectOperand);
-// fourButton.addEventListener(`click`, selectOperand);
-// fiveButton.addEventListener(`click`, selectOperand);
-// sixButton.addEventListener(`click`, selectOperand);
-// sevenButton.addEventListener(`click`, selectOperand);
-// eightButton.addEventListener(`click`, selectOperand);
-// nineButton.addEventListener(`click`, selectOperand);
-
-// addButton.addEventListener(`click`, selectOperator);
-// subtractButton.addEventListener(`click`, selectOperator);
-// multiplyButton.addEventListener(`click`, selectOperator);
-// divideButton.addEventListener(`click`, selectOperator);
 
 equalsButton.addEventListener(`click`, runEquation);
 clearButton.addEventListener(`click`, clear);
