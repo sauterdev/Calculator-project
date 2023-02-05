@@ -8,10 +8,12 @@
 }
 
 body {
+   height: 661px;
+   width: 375px;
    margin: 0 auto;
+   height: 727px;
 }
  main {
-    width: 350px;
     margin: 60px auto;
     background-color: black;
     border: 3px solid red;
