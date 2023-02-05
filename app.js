@@ -10,7 +10,7 @@ let calcDisplay = document.querySelector(`#calcDisplay`);
 //selects all operands and operators in a node list to loop over for event listeners
 const operandButton = document.querySelectorAll(`.operand-button`);
 const  operatorButton = document.querySelectorAll(`.operator-button`);
-//
+
 
  const clearButton = document.querySelector(`#clear`);
  const negativeButton = document.querySelector(`#negative`);
@@ -33,18 +33,14 @@ percentButton.addEventListener(`click`, turnToPercent);
 decimalButton.addEventListener(`click`, decimal);
 
 function selectOperand(x) {
-  if (operatorSelected) {
-    let yellowButtons = document.getElementsByClassName(`operator-button`);
-    for (let i = 0; i < yellowButtons.length; i++) {
-      yellowButtons[i].style.background = `white`;
-    }
-  }
-  if (calcDisplay.innerHTML.length == 9 && firstOperand != ``) {
+  changeOperatorToWhite();
+  clearButton.textContent = `C`;
+  if (calcDisplay.textContent.length == 9 && firstOperand != ``) {
     return;
   } //limits character length in display
-  let newNumber = x.target.innerHTML;
+  let newNumber = x.target.textContent;
   firstOperand = firstOperand + newNumber;
-  calcDisplay.innerHTML = firstOperand;
+  calcDisplay.textContent = firstOperand;
 }
 
 function selectOperator(x) {
@@ -52,7 +48,8 @@ function selectOperator(x) {
     //runs the equation if two operands have been input with current operator
     runEquation();
   }
-  currentOperator = x.target.innerHTML;
+  clearButton.textContent = `C`;
+  currentOperator = x.target.textContent;
   x.target.style.background = "yellow";
   operatorSelected = true;
   secondOperand = firstOperand;
@@ -68,41 +65,49 @@ function runEquation() {
   } else {
     currentValue = eval(secondOperand + currentOperator + firstOperand);
   }
-  calcDisplay.innerHTML = currentValue;
+  calcDisplay.textContent = currentValue;
   firstOperand = currentValue;
   operatorSelected = false; //lets you keep hitting equal with last operator and operand
   return;
 }
 
 function clear() {
-  if (firstOperand) {
+    if(currentOperator) {
+      //clears out if an operator has been selected
+      changeOperatorToWhite();
+    firstOperand = secondOperand;
+    secondOperand = ``;
+    currentOperator = ``;
+    clearButton.innerText = `AC`;
+  } else if (firstOperand) {
     //clears current operand, leaves rest of equation
     firstOperand = ``;
     decimalCounter = false;
-    calcDisplay.innerHTML = `0`;
-    clearButton.innerHTML = `AC`;
-  } else {
+    calcDisplay.textContent = `0`;
+    clearButton.textContent = `AC`;
+  }
+  else {
     //all clear, sets everything back to start point
     currentValue = ``;
     secondOperand = ``;
     currentOperator = ``;
     operatorSelected = false;
     decimalCounter = false;
-    calcDisplay.innerHTML = `0`;
-    clearButton.innerHTML = `C`;
+    calcDisplay.textContent = `0`;
+    clearButton.textContent = `C`;
   }
   return;
 }
 
 function makeNegative() {
   firstOperand = firstOperand * -1;
-  calcDisplay.innerHTML = firstOperand;
+  calcDisplay.textContent = firstOperand;
   return;
 }
 
 function turnToPercent() {
   firstOperand = firstOperand / 100;
-  calcDisplay.innerHTML = firstOperand;
+  calcDisplay.textContent = firstOperand;
 }
 
 function decimal() {
@@ -112,6 +117,13 @@ function decimal() {
   }
   firstOperand = firstOperand + `.`;
   decimalCounter = true;
-  calcDisplay.innerHTML = firstOperand;
+  calcDisplay.textContent = firstOperand;
   return;
+}
+
+function changeOperatorToWhite() {
+    let yellowButtons = document.getElementsByClassName(`operator-button`);
+    for (let i = 0; i < yellowButtons.length; i++) {
+      yellowButtons[i].style.background = `white`;
+    }
 }
